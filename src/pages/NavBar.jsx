@@ -3,23 +3,34 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const handleLogut = async () => {
+  const navigate = useNavigate(); // <- call the hook
+
+  const handleLogout = async (e) => {
+    // if used on an <a>, prevent default
+    if (e && e.preventDefault) e.preventDefault();
+
     try {
       const res = await axios.post(
         BASE_URL + "/logout",
-
-        {
-          withCredentials: true,
-        }
+        {},
+        { withCredentials: true }
       );
-      dispatch(removeUser(res.data));
+
+      console.log("logout response:", res.status, res.data);
+
+      // clear any client-side token if you used localStorage/sessionStorage
+      // localStorage.removeItem("token");
+
+      dispatch(removeUser());
+      // navigate to login
+      navigate("/login");
     } catch (err) {
-      console.error(err);
+      console.error("Logout failed:", err);
     }
   };
 
@@ -48,7 +59,7 @@ const NavBar = () => {
                 </div>
               </div>
               <ul
-                tabIndex="-1"
+                tabIndex={-1}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 <li>
@@ -61,7 +72,10 @@ const NavBar = () => {
                   <a>Settings</a>
                 </li>
                 <li>
-                  <button onClick={handleLogut}>Logout</button>
+                  {/* use button to avoid anchor default behaviour */}
+                  <button onClick={handleLogout} className="w-full text-left">
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>

@@ -15,6 +15,7 @@ const Body = () => {
 
   const fetchUser = async () => {
     if (userData) return;
+    
     try {
       const res = await axios.get(BASE_URL + "/profile", {
         withCredentials: true,
@@ -24,6 +25,7 @@ const Body = () => {
       if (err.status === 401) {
         navigate("/login");
       } else {
+        navigate("/login");
         console.error(err);
       }
     }
