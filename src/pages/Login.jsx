@@ -33,7 +33,7 @@ const Login = () => {
   };
 
   return (
-    <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 transla">
+    <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2">
       <div className="card card-border bg-base-300 w-96 ">
         <div className="card-body">
           <h2 className="card-title justify-center">Login</h2>
