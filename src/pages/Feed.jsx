@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addFeed } from "../utils/feedSlice";
 import Profile from "./Profile";
+import UserCard from "./UserCard";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Feed = () => {
   }, []);
   return (
     <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2">
-      {feed && <Profile user={feed[1]} />}
+      {feed && <UserCard user={feed[1]} />}
     </div>
   );
 };

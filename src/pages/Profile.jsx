@@ -1,23 +1,18 @@
 import React from "react";
+import ProfileEdit from "./ProfileEdit";
+import { useSelector } from "react-redux";
 
-const Profile = ({ user }) => {
-  const { firstName, lastName, age, gender, photoURL, about } = user;
-
+const Profile = () => {
+  const user = useSelector((store) => store.user);
   return (
-    <div className="card bg-base-300 w-96 shadow-sm p-4">
-      <figure>
-        <img src={photoURL} alt="Profile" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{firstName + " " + lastName}</h2>
-        <p>{about}</p>
-        <p>{age && gender && age + "," + gender}</p>
-        <div className="card-actions justify-center mt-4">
-          <button className="btn btn-primary">Ignore</button>
-          <button className="btn btn-secondary">Interested</button>
+    user && (
+      <div className="flex items-center justify-between width-full">
+        <div>
+          <ProfileEdit user={user} />
         </div>
+        {/* <EditProfileView /> */}
       </div>
-    </div>
+    )
   );
 };
 
