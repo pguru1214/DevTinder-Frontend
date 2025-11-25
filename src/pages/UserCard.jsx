@@ -1,17 +1,53 @@
+// UserCard.jsx
 import React from "react";
 
 const UserCard = ({ user }) => {
-  const { firstName, lastName, age, gender, photoURL, about } = user;
+  if (!user) return null;
+
+  const {
+    firstName = "",
+    lastName = "",
+    about = "",
+    skills = [],
+    photoURL,
+  } = user;
+
+  // fallback image generator
+  const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+    `${firstName} ${lastName}`
+  )}&background=0D8ABC&color=fff`;
+
   return (
-    <div>
-      <div className=" bg-base-300 w-96 shadow-sm p-4">
-        <figure>
-          <img src={photoURL} alt="Profile" />
+    <div className="mb-4">
+      <div className="bg-base-300 w-96 shadow-sm p-4 rounded">
+        <figure className="mb-2 h-48 overflow-hidden rounded">
+          <img
+            src={photoURL || fallback}
+            alt={`${firstName} ${lastName}`}
+            className="w-full h-full object-cover"
+            // if loading fails (404 / blocked / HTML), swap to fallback
+            onError={(e) => {
+              // prevent infinite loop if fallback fails
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = fallback;
+            }}
+          />
         </figure>
+
         <div className="card-body">
-          <h2 className="card-title">{firstName + " " + lastName}</h2>
-          <p>{about}</p>
-          <p>{age && gender && age + "," + gender}</p>
+          <h2 className="card-title">{`${firstName} ${lastName}`.trim()}</h2>
+          <p className="text-sm">{about}</p>
+
+          {skills.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {skills.map((s, i) => (
+                <span key={i} className="badge badge-outline">
+                  {s}
+                </span>
+              ))}
+            </div>
+          )}
+
           <div className="card-actions justify-center mt-4">
             <button className="btn btn-primary">Ignore</button>
             <button className="btn btn-secondary">Interested</button>

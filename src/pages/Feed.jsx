@@ -1,35 +1,42 @@
+// Feed.jsx (render part)
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addFeed } from "../utils/feedSlice";
-import Profile from "./Profile";
 import UserCard from "./UserCard";
 
 const Feed = () => {
   const dispatch = useDispatch();
-
   const feed = useSelector((store) => store.feed);
+  const [loading, setLoading] = useState(false);
 
   const getFeed = async () => {
-    if (feed) return;
-    console.log(feed);
     try {
-      const res = await axios.get(BASE_URL + "/feed", {
-        withCredentials: true,
-      });
-      dispatch(addFeed(res.data));
+      setLoading(true);
+      const res = await axios.get(`${BASE_URL}/feed`, { withCredentials: true });
+      const usersArray = Array.isArray(res.data?.data) ? res.data.data : [];
+      dispatch(addFeed(usersArray));
     } catch (err) {
-      console.error(err.message);
+      console.error("getFeed error:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getFeed();
-  }, []);
+    if (!feed || (Array.isArray(feed) && feed.length === 0)) getFeed();
+  }, [feed]);
+
+  if (loading) return <div>Loading feed...</div>;
+  if (!Array.isArray(feed) || feed.length === 0) return <div>No users found.</div>;
+
   return (
-    <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2">
-      {feed && <UserCard user={feed[1]} />}
+    <div className="min-h-screen flex flex-col items-center gap-4 p-6">
+      {/* min-h-screen ensures page can scroll if content grows */}
+      {feed.map((user, idx) => (
+        <UserCard key={user._id ?? idx} user={user} />
+      ))}
     </div>
   );
 };
