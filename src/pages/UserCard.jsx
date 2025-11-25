@@ -1,7 +1,7 @@
 // UserCard.jsx
 import React from "react";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, acceptCeonnection }) => {
   if (!user) return null;
 
   const {
@@ -10,6 +10,8 @@ const UserCard = ({ user }) => {
     about = "",
     skills = [],
     photoURL,
+    age = '',
+    gender = '',
   } = user;
 
   // fallback image generator
@@ -36,6 +38,9 @@ const UserCard = ({ user }) => {
 
         <div className="card-body">
           <h2 className="card-title">{`${firstName} ${lastName}`.trim()}</h2>
+         <div className="flex items-center">
+           <span className="text-sm">{age}</span> <span className="mx-1">,</span> <span>{gender}</span>
+         </div>
           <p className="text-sm">{about}</p>
 
           {skills.length > 0 && (
@@ -50,7 +55,10 @@ const UserCard = ({ user }) => {
 
           <div className="card-actions justify-center mt-4">
             <button className="btn btn-primary">Ignore</button>
-            <button className="btn btn-secondary">Interested</button>
+            <button className="btn btn-secondary" onClick={() => {
+              status: "accepted"
+              acceptCeonnection(user._id)
+            }}>Interested</button>
           </div>
         </div>
       </div>

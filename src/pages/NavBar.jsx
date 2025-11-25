@@ -69,7 +69,10 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link to="/connections">Connections</Link>
+                </li>
+                <li>
+                  <Link to="/">Feed</Link>
                 </li>
                 <li>
                   {/* use button to avoid anchor default behaviour */}

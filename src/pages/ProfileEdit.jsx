@@ -39,9 +39,9 @@ const ProfileEdit = ({ user }) => {
   };
 
   return (
-    <div className="flex items-center mx-10">
-      <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2 my-10 overflow-y-auto">
-        <div className="card bg-base-300 w-96 shadow-sm p-4 overflow-auto max-h-[50vh]">
+    <div className="flex items-center">
+      <div className="mx-10">
+        <div className="card bg-base-300 w-96 shadow-sm p-4 overflow-auto max-h-[70vh]">
           <h1 className="text-center">Edit Profile</h1>
           <fieldset className="fieldset">
             <legend className="fieldset-legend">First Name</legend>
@@ -117,7 +117,7 @@ const ProfileEdit = ({ user }) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="my-4">
         <UserCard
           user={{ firstName, lastName, age, gender, photoURL, about }}
         />

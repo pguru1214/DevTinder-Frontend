@@ -32,7 +32,7 @@ const Feed = () => {
   if (!Array.isArray(feed) || feed.length === 0) return <div>No users found.</div>;
 
   return (
-    <div className="min-h-screen flex flex-col items-center gap-4 p-6">
+    <div className="flex flex-wrap items-center gap-4 p-6 connection-card">
       {/* min-h-screen ensures page can scroll if content grows */}
       {feed.map((user, idx) => (
         <UserCard key={user._id ?? idx} user={user} />

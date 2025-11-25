@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+
+.connection-card {
+    max-height: calc(100vh - 132px);
+    min-height: calc(100vh - 132px);;
+    overflow-y: auto;
+}
