@@ -75,6 +75,9 @@ const NavBar = () => {
                   <Link to="/">Feed</Link>
                 </li>
                 <li>
+                  <Link to="/requests">Requests</Link>
+                </li>
+                <li>
                   {/* use button to avoid anchor default behaviour */}
                   <button onClick={handleLogout} className="w-full text-left">
                     Logout

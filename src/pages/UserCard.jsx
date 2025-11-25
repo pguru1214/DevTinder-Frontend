@@ -1,17 +1,18 @@
 // UserCard.jsx
 import React from "react";
 
-const UserCard = ({ user, acceptCeonnection }) => {
+const UserCard = ({ user, reviewRequest, showButtons = false }) => {
   if (!user) return null;
 
   const {
+    _id = "",
     firstName = "",
     lastName = "",
     about = "",
     skills = [],
     photoURL,
-    age = '',
-    gender = '',
+    age = "",
+    gender = "",
   } = user;
 
   // fallback image generator
@@ -20,7 +21,7 @@ const UserCard = ({ user, acceptCeonnection }) => {
   )}&background=0D8ABC&color=fff`;
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 mx-4">
       <div className="bg-base-300 w-96 shadow-sm p-4 rounded">
         <figure className="mb-2 h-48 overflow-hidden rounded">
           <img
@@ -38,9 +39,10 @@ const UserCard = ({ user, acceptCeonnection }) => {
 
         <div className="card-body">
           <h2 className="card-title">{`${firstName} ${lastName}`.trim()}</h2>
-         <div className="flex items-center">
-           <span className="text-sm">{age}</span> <span className="mx-1">,</span> <span>{gender}</span>
-         </div>
+          <div className="flex items-center">
+            <span className="text-sm">{age}</span>{" "}
+            <span className="mx-1">,</span> <span>{gender}</span>
+          </div>
           <p className="text-sm">{about}</p>
 
           {skills.length > 0 && (
@@ -53,13 +55,24 @@ const UserCard = ({ user, acceptCeonnection }) => {
             </div>
           )}
 
-          <div className="card-actions justify-center mt-4">
-            <button className="btn btn-primary">Ignore</button>
-            <button className="btn btn-secondary" onClick={() => {
-              status: "accepted"
-              acceptCeonnection(user._id)
-            }}>Interested</button>
-          </div>
+          {showButtons && (
+            <div className="card-actions justify-center mt-4">
+              <button
+                className="btn btn-primary"
+                onClick={() => reviewRequest("rejected", _id)}
+              >
+                Ignore
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  console.log("clicked"), reviewRequest("accepted", _id);
+                }}
+              >
+                Interested
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
