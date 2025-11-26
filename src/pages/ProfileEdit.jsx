@@ -10,7 +10,7 @@ const ProfileEdit = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [age, setAge] = useState(user.age);
-  const [photoURL, setPhotoUrl] = useState(user.photourl);
+  const [photoURL, setPhotoUrl] = useState(user.photoURL);
   const [gender, setGender] = useState(user.gender);
   const [about, setAbout] = useState(user.about);
 
@@ -39,41 +39,45 @@ const ProfileEdit = ({ user }) => {
   };
 
   return (
-    <div className="flex items-center">
-      <div className="mx-10">
-        <div className="card bg-base-300 w-96 shadow-sm p-4 overflow-auto max-h-[70vh]">
-          <h1 className="text-center">Edit Profile</h1>
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">First Name</legend>
-            <input
-              type="text"
-              className="input"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <legend className="fieldset-legend">Last Name</legend>
-            <input
-              type="text"
-              className="input"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            <legend className="fieldset-legend">Age</legend>
-            <input
-              type="text"
-              className="input"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-            />
-            <legend className="fieldset-legend">PhotoURL</legend>
-            <input
-              type="text"
-              className="input"
-              value={photoURL}
-              onChange={(e) => setPhotoUrl(e.target.value)}
-            />
-            <legend className="fieldset-legend">Gender</legend>
-            {/* <div className="dropdown dropdown-end">
+    <div className="my-10 w-full">
+      <h1 className="text-3xl font-bold mb-6 mt-80 text-center">
+        Edit profile
+      </h1>
+      <div className="flex">
+        <div className="mx-10">
+          <div className="card bg-base-300 w-96 shadow-sm p-4 ">
+            <h1 className="text-center">Edit Profile</h1>
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">First Name</legend>
+              <input
+                type="text"
+                className="input"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <legend className="fieldset-legend">Last Name</legend>
+              <input
+                type="text"
+                className="input"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <legend className="fieldset-legend">Age</legend>
+              <input
+                type="text"
+                className="input"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+              />
+              <legend className="fieldset-legend">PhotoURL</legend>
+              <input
+                type="text"
+                className="input"
+                value={photoURL}
+                onChange={(e) => setPhotoUrl(e.target.value)}
+              />
+              <legend className="fieldset-legend">Gender</legend>
+              {/* <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
                 role="input"
@@ -98,29 +102,35 @@ const ProfileEdit = ({ user }) => {
                 </li>
               </ul>
             </div> */}
-            <input
-              type="text"
-              className="input"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            />
-            <legend className="fieldset-legend">About</legend>
-            <textarea
-              className="textarea h-24"
-              placeholder="Bio"
-              value={about}
-              onChange={(e) => setAbout(e.target.value)}
-            ></textarea>
-          </fieldset>
-          <div className="card-actions justify-center">
-            <button className="btn btn-primary mt-3" onClick={profileEditChange}>Save Changes</button>
+              <input
+                type="text"
+                className="input"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              />
+              <legend className="fieldset-legend">About</legend>
+              <textarea
+                className="textarea h-24"
+                placeholder="Bio"
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
+              ></textarea>
+            </fieldset>
+            <div className="card-actions justify-center">
+              <button
+                className="btn btn-primary mt-3"
+                onClick={profileEditChange}
+              >
+                Save Changes
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="my-4">
-        <UserCard
-          user={{ firstName, lastName, age, gender, photoURL, about }}
-        />
+        <div>
+          <UserCard
+            user={{ firstName, lastName, age, gender, photoURL, about }}
+          />
+        </div>
       </div>
     </div>
   );

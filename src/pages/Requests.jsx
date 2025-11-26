@@ -50,7 +50,7 @@ const Requests = () => {
       )}
 
       <div className="mb-4 flex flex-wrap items-center justify-center ">
-        {userRequest.map((request) => (
+        {userRequest && userRequest.map((request) => (
           <div key={request._id} className="mx-4">
             <UserCard
               user={request.fromUserId}

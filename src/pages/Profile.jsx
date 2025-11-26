@@ -6,7 +6,7 @@ const Profile = () => {
   const user = useSelector((store) => store.user);
   return (
     user && (
-      <div className="flex items-center justify-between width-full connection-card">
+      <div className="flex items-center justify-center w-full connection-card">
         <div>
           <ProfileEdit user={user} />
         </div>
