@@ -1,7 +1,7 @@
 // UserCard.jsx
 import React from "react";
 
-const UserCard = ({ user, reviewRequest, showButtons = false }) => {
+const UserCard = ({ user, reviewRequest, showButtons = false, showFeedButtons = false }) => {
   if (!user) return null;
 
   const {
@@ -22,15 +22,13 @@ const UserCard = ({ user, reviewRequest, showButtons = false }) => {
 
   return (
     <div className="mb-4 mx-4">
-      <div className="bg-base-300 w-96 shadow-sm p-4 rounded">
+      <div className="bg-base-300 w-96 shadow-sm p-4 rounded max-[767px]:w-82">
         <figure className="mb-2 h-48 overflow-hidden rounded">
           <img
             src={photoURL || fallback}
             alt={`${firstName} ${lastName}`}
             className="w-full h-full object-cover"
-            // if loading fails (404 / blocked / HTML), swap to fallback
             onError={(e) => {
-              // prevent infinite loop if fallback fails
               e.currentTarget.onerror = null;
               e.currentTarget.src = fallback;
             }}
@@ -61,12 +59,30 @@ const UserCard = ({ user, reviewRequest, showButtons = false }) => {
                 className="btn btn-primary"
                 onClick={() => reviewRequest("rejected", _id)}
               >
-                Ignore
+                Rejected
               </button>
               <button
                 className="btn btn-secondary"
                 onClick={() => {
                   console.log("clicked"), reviewRequest("accepted", _id);
+                }}
+              >
+                Accepted
+              </button>
+            </div>
+          )}
+          {showFeedButtons && (
+            <div className="card-actions justify-center mt-4">
+              <button
+                className="btn btn-primary"
+                onClick={() => reviewRequest("ignored", _id)}
+              >
+                Ignore
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  console.log("clicked"), reviewRequest("interested", _id);
                 }}
               >
                 Interested

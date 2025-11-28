@@ -40,12 +40,12 @@ const ProfileEdit = ({ user }) => {
 
   return (
     <div className="my-10 w-full">
-      <h1 className="text-3xl font-bold mb-6 mt-80 text-center">
+      <h1 className="text-3xl font-bold mb-6 mt-10 text-center max-[767px]:mt-10">
         Edit profile
       </h1>
-      <div className="flex">
-        <div className="mx-10">
-          <div className="card bg-base-300 w-96 shadow-sm p-4 ">
+      <div className="flex flex-wrap justify-center">
+        <div className="mx-10 max-[767px]:mx-0">
+          <div className="card bg-base-300 w-96 shadow-sm p-4 max-[767px]:w-82 max-[767px]:mb-8 ">
             <h1 className="text-center">Edit Profile</h1>
             <fieldset className="fieldset">
               <legend className="fieldset-legend">First Name</legend>
